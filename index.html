@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5B5FEF">
+  <title>KMA | Knowledge & Mastery Academy</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- شاشة الدخول -->
+  <section id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+      <div class="logo">KMA</div>
+
+      <h1>Knowledge & Mastery Academy</h1>
+
+      <p>
+        منصتك الذكية للتعلم وتنظيم وقتك وتحقيق أهدافك.
+      </p>
+
+      <input
+        id="studentName"
+        type="text"
+        placeholder="اكتب اسمك"
+      >
+
+      <input
+        id="studentEmail"
+        type="email"
+        placeholder="البريد الإلكتروني"
+        dir="ltr"
+      >
+
+      <button onclick="startApp()">
+        دخول إلى KMA 🚀
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- التطبيق -->
+  <div id="app" class="app hidden">
+
+    <!-- الشريط العلوي -->
+    <header class="topbar">
+
+      <div class="brand">
+        <span class="brand-logo">KMA</span>
+
+        <div>
+          <strong>Knowledge & Mastery Academy</strong>
+          <small>تعلم • نظم • تطور</small>
+        </div>
+      </div>
+
+      <div class="top-actions">
+
+        <button
+          class="icon-btn"
+          onclick="toggleDarkMode()"
+          title="الوضع الليلي"
+        >
+          🌙
+        </button>
+
+        <div id="userAvatar" class="avatar">
+          A
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <div class="layout">
+
+      <!-- القائمة الجانبية -->
+      <aside class="sidebar">
+
+        <button
+          class="nav-btn active"
+          onclick="showPage('home', this)"
+        >
+          🏠
+          <span>الرئيسية</span>
+        </button>
+
+        <button
+          class="nav-btn"
+          onclick="showPage('library', this)"
+        >
+          📚
+          <span>المكتبة</span>
+        </button>
+
+        <button
+          class="nav-btn"
+          onclick="showPage('study', this)"
+        >
+          ⏱️
+          <span>المذاكرة</span>
+        </button>
+
+        <button
+          class="nav-btn"
+          onclick="showPage('tasks', this)"
+        >
+          ✅
+          <span>المهام</span>
+        </button>
+
+        <button
+          class="nav-btn"
+          onclick="showPage('notes', this)"
+        >
+          📝
+          <span>الملاحظات</span>
+        </button>
+
+        <button
+          class="nav-btn"
+          onclick="showPage('stats', this)"
+        >
+          📊
+          <span>الإحصائيات</span>
+        </button>
+
+        <button
+          class="nav-btn"
+          onclick="showPage('profile', this)"
+        >
+          👤
+          <span>حسابي</span>
+        </button>
+
+      </aside>
+
+
+      <!-- المحتوى -->
+      <main class="content">
+
+
+        <!-- الرئيسية -->
+        <section id="home" class="page active">
+
+          <div class="hero">
+
+            <div>
+
+              <span class="hero-small">
+                أهلاً بك في KMA 👋
+              </span>
+
+              <h1 id="welcomeMessage">
+                مستعد تبدأ؟
+              </h1>
+
+              <p>
+                تعلم كل يوم شيئًا جديدًا،
+                وخطوة صغيرة اليوم تصنع فرقًا كبيرًا غدًا.
+              </p>
+
+              <button
+                class="hero-button"
+                onclick="showPageById('study')"
+              >
+                ابدأ المذاكرة 🚀
+              </button>
+
+            </div>
+
+            <div class="hero-icon">
+              🎓
+            </div>
+
+          </div>
+
+
+          <div class="stats-grid">
+
+            <div class="stat-card">
+              <span>📚</span>
+              <strong id="booksCount">0</strong>
+              <small>كتاب</small>
+            </div>
+
+            <div class="stat-card">
+              <span>✅</span>
+              <strong id="tasksCount">0</strong>
+              <small>مهمة مكتملة</small>
+            </div>
+
+            <div class="stat-card">
+              <span>⏱️</span>
+              <strong id="minutesCount">0</strong>
+              <small>دقيقة مذاكرة</small>
+            </div>
+
+            <div class="stat-card">
+              <span>⭐</span>
+              <strong id="pointsCount">0</strong>
+              <small>نقطة</small>
+            </div>
+
+          </div>
+
+
+          <div class="two-columns">
+
+            <div class="card">
+
+              <div class="card-title">
+
+                <h2>🎯 هدفك اليوم</h2>
+
+                <button onclick="changeGoal()">
+                  تعديل
+                </button>
+
+              </div>
+
+              <p id="goalText">
+                هدفك اليوم: 60 دقيقة مذاكرة
+              </p>
+
+              <div class="progress">
+                <span id="goalProgress"></span>
+              </div>
+
+              <small id="goalPercent">
+                0%
+              </small>
+
+            </div>
+
+
+            <div class="card motivation">
+
+              <div class="motivation-icon">
+                💡
+              </div>
+
+              <div>
+
+                <h2>رسالة اليوم</h2>
+
+                <p id="quote">
+                  ابدأ بخطوة صغيرة، واستمر.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+
+              <h2>⚡ الوصول السريع</h2>
+
+            </div>
+
+            <div class="quick-grid">
+
+              <button onclick="showPageById('library')">
+                📚
+                <strong>المكتبة</strong>
+                <small>الكتب والمصادر</small>
+              </button>
+
+              <button onclick="showPageById('study')">
+                ⏱️
+                <strong>جلسة مذاكرة</strong>
+                <small>ابدأ الآن</small>
+              </button>
+
+              <button onclick="showPageById('tasks')">
+                ✅
+                <strong>المهام</strong>
+                <small>نظم يومك</small>
+              </button>
+
+              <button onclick="showPageById('notes')">
+                📝
+                <strong>ملاحظاتي</strong>
+                <small>أفكارك المهمة</small>
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- المكتبة -->
+        <section id="library" class="page">
+
+          <div class="page-header">
+
+            <div>
+              <h1>📚 المكتبة</h1>
+
+              <p>
+                ابحث عن الكتاب الذي تريد دراسته.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="search-box">
+
+            <input
+              id="bookSearch"
+              type="search"
+              placeholder="🔎 ابحث عن كتاب..."
+              oninput="searchBooks()"
+            >
+
+            <select id="subjectFilter" onchange="searchBooks()">
+
+              <option value="all">
+                كل المواد
+              </option>
+
+              <option value="رياضيات">
+                رياضيات
+              </option>
+
+              <option value="فيزياء">
+                فيزياء
+              </option>
+
+              <option value="كيمياء">
+                كيمياء
+              </option>
+
+              <option value="لغة عربية">
+                لغة عربية
+              </option>
+
+              <option value="لغة إنجليزية">
+                لغة إنجليزية
+              </option>
+
+              <option value="أحياء">
+                أحياء
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div id="booksGrid" class="books-grid"></div>
+
+        </section>
+
+
+        <!-- المذاكرة -->
+        <section id="study" class="page">
+
+          <div class="page-header">
+
+            <h1>⏱️ جلسة المذاكرة</h1>
+
+            <p>
+              اختر المدة التي تريدها وابدأ التركيز.
+            </p>
+
+          </div>
+
+
+          <div class="timer-card card">
+
+            <div class="timer-settings">
+
+              <input
+                id="studyMinutes"
+                type="number"
+                min="1"
+                value="25"
+                placeholder="عدد الدقائق"
+              >
+
+              <input
+                id="studySubject"
+                type="text"
+                placeholder="المادة"
+              >
+
+            </div>
+
+
+            <div class="timer">
+
+              <span id="timerDisplay">
+                25:00
+              </span>
+
+            </div>
+
+
+            <div class="timer-buttons">
+
+              <button onclick="startTimer()">
+                ▶ تشغيل
+              </button>
+
+              <button onclick="pauseTimer()">
+                ⏸ إيقاف
+              </button>
+
+              <button onclick="resetTimer()">
+                🔄 إعادة
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- المهام -->
+        <section id="tasks" class="page">
+
+          <div class="page-header">
+
+            <h1>✅ المهام</h1>
+
+            <p>
+              نظم المهام التي تريد إنجازها.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="add-task">
+
+              <input
+                id="taskInput"
+                type="text"
+                placeholder="اكتب مهمة جديدة..."
+                onkeydown="if(event.key==='Enter') addTask()"
+              >
+
+              <button onclick="addTask()">
+                إضافة
+              </button>
+
+            </div>
+
+            <div id="tasksList"></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- الملاحظات -->
+        <section id="notes" class="page">
+
+          <div class="page-header">
+
+            <h1>📝 ملاحظاتي</h1>
+
+            <p>
+              احفظ أفكارك وملاحظاتك المهمة.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <textarea
+              id="notesArea"
+              placeholder="اكتب ملاحظاتك هنا..."
+            ></textarea>
+
+            <button
+              class="save-button"
+              onclick="saveNotes()"
+            >
+              💾 حفظ الملاحظات
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- الإحصائيات -->
+        <section id="stats" class="page">
+
+          <div class="page-header">
+
+            <h1>📊 الإحصائيات</h1>
+
+            <p>
+              تابع تقدمك في رحلة التعلم.
+            </p>
+
+          </div>
+
+
+          <div class="stats-big">
+
+            <div class="card">
+              ⏱️
+              <strong id="totalMinutes">
+                0
+              </strong>
+              <small>
+                إجمالي دقائق المذاكرة
+              </small>
+            </div>
+
+            <div class="card">
+              ✅
+              <strong id="totalTasks">
+                0
+              </strong>
+              <small>
+                المهام المكتملة
+              </small>
+            </div>
+
+            <div class="card">
+              ⭐
+              <strong id="totalPoints">
+                0
+              </strong>
+              <small>
+                النقاط
+              </small>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- الحساب -->
+        <section id="profile" class="page">
+
+          <div class="page-header">
+
+            <h1>👤 حسابي</h1>
+
+            <p>
+              معلومات الطالب.
+            </p>
+
+          </div>
+
+
+          <div class="profile-card card">
+
+            <div id="profileAvatar" class="profile-avatar">
+              A
+            </div>
+
+            <h2 id="profileName">
+              الطالب
+            </h2>
+
+            <p id="profileEmail">
+              -
+            </p>
+
+            <button onclick="logout()">
+              تسجيل الخروج
+            </button>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+
+    <!-- شريط الموبايل -->
+    <nav class="mobile-nav">
+
+      <button onclick="showPageById('home')">
+        🏠
+        <small>الرئيسية</small>
+      </button>
+
+      <button onclick="showPageById('library')">
+        📚
+        <small>المكتبة</small>
+      </button>
+
+      <button onclick="showPageById('study')">
+        ⏱️
+        <small>المذاكرة</small>
+      </button>
+
+      <button onclick="showPageById('tasks')">
+        ✅
+        <small>المهام</small>
+      </button>
+
+      <button onclick="showPageById('profile')">
+        👤
+        <small>حسابي</small>
+      </button>
+
+    </nav>
+
+  </div>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
